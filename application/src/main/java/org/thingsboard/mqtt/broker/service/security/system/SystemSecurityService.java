@@ -19,7 +19,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.thingsboard.mqtt.broker.common.data.security.UserCredentials;
 import org.thingsboard.mqtt.broker.dao.exception.DataValidationException;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public interface SystemSecurityService {
 

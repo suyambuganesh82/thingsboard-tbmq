@@ -31,7 +31,7 @@ import org.thingsboard.mqtt.broker.queue.provider.ClientSubscriptionsQueueFactor
 import org.thingsboard.mqtt.broker.service.stats.ClientSubscriptionConsumerStats;
 import org.thingsboard.mqtt.broker.service.stats.StatsManager;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;

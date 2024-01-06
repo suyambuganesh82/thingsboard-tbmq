@@ -59,20 +59,21 @@ public class JwtTokenFactory {
         if (securityUser.getAuthority() == null)
             throw new IllegalArgumentException("User doesn't have any privileges");
 
-        Claims claims = Jwts.claims().setSubject(securityUser.getEmail());
-        claims.put(SCOPES, securityUser.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
-        claims.put(USER_ID, securityUser.getId().toString());
-        claims.put(FIRST_NAME, securityUser.getFirstName());
-        claims.put(LAST_NAME, securityUser.getLastName());
-        claims.put(ENABLED, securityUser.isEnabled());
+        Claims claims = Jwts.claims().subject(securityUser.getEmail())
+                .add(SCOPES, securityUser.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+                .add(USER_ID, securityUser.getId().toString())
+                .add(FIRST_NAME, securityUser.getFirstName())
+                .add(LAST_NAME, securityUser.getLastName())
+                .add(ENABLED, securityUser.isEnabled())
+                .build();
 
         ZonedDateTime currentTime = ZonedDateTime.now();
 
         String token = Jwts.builder()
-                .setClaims(claims)
-                .setIssuer(settings.getTokenIssuer())
-                .setIssuedAt(Date.from(currentTime.toInstant()))
-                .setExpiration(Date.from(currentTime.plusSeconds(settings.getTokenExpirationTime()).toInstant()))
+                .claims(claims)
+                .issuer(settings.getTokenIssuer())
+                .issuedAt(Date.from(currentTime.toInstant()))
+                .expiration(Date.from(currentTime.plusSeconds(settings.getTokenExpirationTime()).toInstant()))
                 .signWith(SignatureAlgorithm.HS512, settings.getTokenSigningKey())
                 .compact();
 
@@ -81,7 +82,7 @@ public class JwtTokenFactory {
 
     public SecurityUser parseAccessJwtToken(RawAccessJwtToken rawAccessToken) {
         Jws<Claims> jwsClaims = rawAccessToken.parseClaims(settings.getTokenSigningKey());
-        Claims claims = jwsClaims.getBody();
+        Claims claims = jwsClaims.getPayload();
         String subject = claims.getSubject();
         List<String> scopes = claims.get(SCOPES, List.class);
         if (scopes == null || scopes.isEmpty()) {
@@ -105,16 +106,17 @@ public class JwtTokenFactory {
 
         ZonedDateTime currentTime = ZonedDateTime.now();
 
-        Claims claims = Jwts.claims().setSubject(securityUser.getEmail());
-        claims.put(SCOPES, Collections.singletonList(Authority.REFRESH_TOKEN.name()));
-        claims.put(USER_ID, securityUser.getId().toString());
+        Claims claims = Jwts.claims().subject(securityUser.getEmail())
+                .add(SCOPES, Collections.singletonList(Authority.REFRESH_TOKEN.name()))
+                .add(USER_ID, securityUser.getId().toString())
+                .build();
 
         String token = Jwts.builder()
-                .setClaims(claims)
-                .setIssuer(settings.getTokenIssuer())
-                .setId(UUID.randomUUID().toString())
-                .setIssuedAt(Date.from(currentTime.toInstant()))
-                .setExpiration(Date.from(currentTime.plusSeconds(settings.getRefreshTokenExpTime()).toInstant()))
+                .claims(claims)
+                .issuer(settings.getTokenIssuer())
+                .id(UUID.randomUUID().toString())
+                .issuedAt(Date.from(currentTime.toInstant()))
+                .expiration(Date.from(currentTime.plusSeconds(settings.getRefreshTokenExpTime()).toInstant()))
                 .signWith(SignatureAlgorithm.HS512, settings.getTokenSigningKey())
                 .compact();
 
@@ -123,7 +125,7 @@ public class JwtTokenFactory {
 
     public SecurityUser parseRefreshToken(RawAccessJwtToken rawAccessToken) {
         Jws<Claims> jwsClaims = rawAccessToken.parseClaims(settings.getTokenSigningKey());
-        Claims claims = jwsClaims.getBody();
+        Claims claims = jwsClaims.getPayload();
         List<String> scopes = claims.get(SCOPES, List.class);
         if (scopes == null || scopes.isEmpty()) {
             throw new IllegalArgumentException("Refresh Token doesn't have any scopes");

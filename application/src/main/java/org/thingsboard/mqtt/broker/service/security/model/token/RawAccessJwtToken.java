@@ -15,13 +15,7 @@
  */
 package org.thingsboard.mqtt.broker.service.security.model.token;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.thingsboard.mqtt.broker.service.security.exception.JwtExpiredTokenException;
@@ -50,7 +44,8 @@ public class RawAccessJwtToken implements JwtToken, Serializable {
      */
     public Jws<Claims> parseClaims(String signingKey) {
         try {
-            return Jwts.parser().setSigningKey(signingKey).parseClaimsJws(this.token);
+//            return Jwts.parser().setSigningKey(signingKey).parseClaimsJws(this.token);
+            return Jwts.parser().setSigningKey(signingKey).build().parseSignedClaims(this.token);
         } catch (UnsupportedJwtException | MalformedJwtException | IllegalArgumentException | SignatureException ex) {
             log.debug("Invalid JWT Token", ex);
             throw new BadCredentialsException("Invalid JWT token: ", ex);

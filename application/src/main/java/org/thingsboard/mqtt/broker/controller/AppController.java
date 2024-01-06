@@ -15,7 +15,6 @@
  */
 package org.thingsboard.mqtt.broker.controller;
 
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +47,6 @@ public class AppController extends BaseController {
     private final BrokerHomePageConfig brokerHomePageConfig;
 
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
-    @ApiOperation(value = "Get all running actors", hidden = true)
     @RequestMapping(value = "/active-actors", method = RequestMethod.GET)
     @ResponseBody
     public Collection<TbActorId> getAllActorIds() throws ThingsboardException {
@@ -115,7 +113,6 @@ public class AppController extends BaseController {
 
     @PreAuthorize("hasAuthority('SYS_ADMIN')")
     @RequestMapping(value = "/consumer-group", method = RequestMethod.DELETE)
-    @ApiOperation(value = "Delete Kafka Consumer Group", hidden = true)
     public void deleteKafkaConsumerGroup(@RequestParam String groupId) throws ThingsboardException {
         try {
             tbQueueAdmin.deleteConsumerGroup(groupId);

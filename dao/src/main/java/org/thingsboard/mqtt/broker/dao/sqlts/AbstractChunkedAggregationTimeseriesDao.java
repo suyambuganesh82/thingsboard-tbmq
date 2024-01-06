@@ -39,9 +39,9 @@ import org.thingsboard.mqtt.broker.dao.sqlts.insert.InsertTsRepository;
 import org.thingsboard.mqtt.broker.dao.sqlts.ts.TsKvRepository;
 import org.thingsboard.mqtt.broker.dao.timeseries.TimeseriesDao;
 
-import javax.annotation.Nullable;
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.Nullable;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

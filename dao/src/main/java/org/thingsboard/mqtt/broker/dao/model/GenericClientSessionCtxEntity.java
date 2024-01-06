@@ -18,23 +18,21 @@ package org.thingsboard.mqtt.broker.dao.model;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import org.thingsboard.mqtt.broker.common.data.GenericClientSessionCtx;
 import org.thingsboard.mqtt.broker.common.util.JacksonUtil;
-import org.thingsboard.mqtt.broker.dao.util.mapping.JsonStringType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.io.IOException;
 import java.util.Set;
 
 @Data
 @EqualsAndHashCode
 @Entity
-@TypeDef(name = "json", typeClass = JsonStringType.class)
 @Table(name = ModelConstants.GENERIC_CLIENT_SESSION_CTX_COLUMN_FAMILY_NAME)
 public class GenericClientSessionCtxEntity implements ToData<GenericClientSessionCtx> {
     @Id
@@ -44,7 +42,7 @@ public class GenericClientSessionCtxEntity implements ToData<GenericClientSessio
     @Column(name = ModelConstants.GENERIC_CLIENT_SESSION_CTX_LAST_UPDATED_PROPERTY)
     private long lastUpdatedTime;
 
-    @Type(type = "json")
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = ModelConstants.GENERIC_CLIENT_SESSION_CTX_QOS2_PUBLISH_PACKET_IDS_PROPERTY)
     private JsonNode qos2PublishPacketIds;
 

@@ -33,8 +33,8 @@ import org.thingsboard.mqtt.broker.dao.sql.TbSqlBlockingQueuePool;
 import org.thingsboard.mqtt.broker.dao.sql.TbSqlQueue;
 import org.thingsboard.mqtt.broker.dao.sql.TbSqlQueueParams;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;

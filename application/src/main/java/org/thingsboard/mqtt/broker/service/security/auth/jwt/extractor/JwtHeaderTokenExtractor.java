@@ -20,7 +20,7 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.stereotype.Component;
 import org.thingsboard.mqtt.broker.config.SecurityConfiguration;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Component
 public class JwtHeaderTokenExtractor implements TokenExtractor {

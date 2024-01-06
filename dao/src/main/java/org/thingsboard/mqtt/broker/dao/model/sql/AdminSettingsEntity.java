@@ -18,16 +18,16 @@ package org.thingsboard.mqtt.broker.dao.model.sql;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+import org.hibernate.type.SqlTypes;
 import org.thingsboard.mqtt.broker.common.data.AdminSettings;
 import org.thingsboard.mqtt.broker.dao.model.BaseEntity;
 import org.thingsboard.mqtt.broker.dao.model.BaseSqlEntity;
-import org.thingsboard.mqtt.broker.dao.util.mapping.JsonStringType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import static org.thingsboard.mqtt.broker.dao.model.ModelConstants.ADMIN_SETTINGS_COLUMN_FAMILY_NAME;
 import static org.thingsboard.mqtt.broker.dao.model.ModelConstants.ADMIN_SETTINGS_JSON_VALUE_PROPERTY;
@@ -36,14 +36,13 @@ import static org.thingsboard.mqtt.broker.dao.model.ModelConstants.ADMIN_SETTING
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@TypeDef(name = "json", typeClass = JsonStringType.class)
 @Table(name = ADMIN_SETTINGS_COLUMN_FAMILY_NAME)
 public final class AdminSettingsEntity extends BaseSqlEntity<AdminSettings> implements BaseEntity<AdminSettings> {
 
     @Column(name = ADMIN_SETTINGS_KEY_PROPERTY)
     private String key;
 
-    @Type(type = "json")
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = ADMIN_SETTINGS_JSON_VALUE_PROPERTY)
     private JsonNode jsonValue;
 

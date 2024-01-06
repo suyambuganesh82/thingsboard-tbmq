@@ -21,7 +21,7 @@ server:
   # HTTP Server bind address (has no effect if web-environment is disabled)
   address: "${HTTP_BIND_ADDRESS:0.0.0.0}"
   # HTTP Server bind port (has no effect if web-environment is disabled)
-  port: "${HTTP_BIND_PORT:8083}"
+  port: "${HTTP_BIND_PORT:8000}"
   # Log errors with stacktrace when REST API throws exception
   log_controller_error_stack_trace: "${HTTP_LOG_CONTROLLER_ERROR_STACK_TRACE:false}"
   # Server SSL configuration
@@ -559,6 +559,8 @@ sql:
 
 # SQL DAO configuration parameters
 spring:
+  main:
+    allow-circular-references: true
   data:
     jpa:
       repositories:
@@ -609,7 +611,7 @@ security:
     auth_strategy: "${SECURITY_MQTT_AUTH_STRATEGY:BOTH}"
     basic:
       # If enabled the server will try to authenticate client with clientId and/or username and/or password
-      enabled: "${SECURITY_MQTT_BASIC_ENABLED:false}"
+      enabled: "${SECURITY_MQTT_BASIC_ENABLED:true}"
     ssl:
       # If enabled the server will try to authenticate client with client certificate chain
       enabled: "${SECURITY_MQTT_SSL_ENABLED:false}"
@@ -624,7 +626,7 @@ security:
     # User JWT Token issuer
     tokenIssuer: "${JWT_TOKEN_ISSUER:thingsboard.io}"
     # User JWT Token sign key
-    tokenSigningKey: "${JWT_TOKEN_SIGNING_KEY:thingsboardDefaultSigningKey}"
+    tokenSigningKey: "${JWT_TOKEN_SIGNING_KEY:thingsboardDefaultSigningKeythingsboardDefaultSigningKeythingsboardDefaultSigningKeythingsboardDefaultSigningKey}"
   basic:
     # Enable/Disable basic security options
     enabled: "${SECURITY_BASIC_ENABLED:false}"

@@ -26,11 +26,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.thingsboard.mqtt.broker.common.util.JacksonUtil;
-import springfox.documentation.annotations.ApiIgnore;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
-@ApiIgnore
 @RestController
 @RequestMapping("/api")
 @Slf4j

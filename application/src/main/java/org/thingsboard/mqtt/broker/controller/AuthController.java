@@ -46,7 +46,7 @@ import org.thingsboard.mqtt.broker.service.security.model.token.JwtToken;
 import org.thingsboard.mqtt.broker.service.security.model.token.JwtTokenFactory;
 import org.thingsboard.mqtt.broker.service.security.system.SystemSecurityService;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.net.URISyntaxException;
 

@@ -189,8 +189,8 @@ public abstract class AbstractWebTest extends AbstractPubSubIntegrationTest {
         int i = token.lastIndexOf('.');
         Assert.assertTrue(i > 0);
         String withoutSignature = token.substring(0, i + 1);
-        Jwt<Header, Claims> jwsClaims = Jwts.parser().parseClaimsJwt(withoutSignature);
-        Claims claims = jwsClaims.getBody();
+        Jwt<Header, Claims> jwsClaims = Jwts.parser().build().parseUnsecuredClaims(withoutSignature);
+        Claims claims = jwsClaims.getPayload();
         String subject = claims.getSubject();
         Assert.assertEquals(username, subject);
     }

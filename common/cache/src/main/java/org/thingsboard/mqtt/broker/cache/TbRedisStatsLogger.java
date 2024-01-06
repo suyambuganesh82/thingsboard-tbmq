@@ -27,9 +27,10 @@ import org.springframework.data.redis.cache.RedisCache;
 import org.springframework.stereotype.Component;
 import org.thingsboard.mqtt.broker.common.util.ThingsBoardThreadFactory;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
 import javax.annotation.Nonnegative;
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;

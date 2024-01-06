@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 import org.thingsboard.mqtt.broker.server.AbstractMqttChannelInitializer;
 import org.thingsboard.mqtt.broker.server.AbstractMqttServerBootstrap;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 
 @Service
 @RequiredArgsConstructor

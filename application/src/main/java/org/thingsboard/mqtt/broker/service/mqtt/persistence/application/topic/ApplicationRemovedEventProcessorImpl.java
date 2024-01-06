@@ -26,7 +26,7 @@ import org.thingsboard.mqtt.broker.queue.common.TbProtoQueueMsg;
 import org.thingsboard.mqtt.broker.queue.provider.ApplicationRemovedEventQueueFactory;
 import org.thingsboard.mqtt.broker.service.mqtt.client.event.ClientSessionEventService;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 import java.util.List;
 
 @Slf4j
